@@ -1,4 +1,3 @@
-import { UniqueIdEntity } from '../../shared/value-objects/unique-id-entity.vo';
 import { Category } from '../category';
 
 describe('Category Unit Test Entity', () => {
@@ -20,7 +19,7 @@ describe('Category Unit Test Entity', () => {
         expect(category.description).toBe('test');
         expect(category.isActive).toBeTruthy();
         expect(category.createdAt).toBe(createdAt);
-        expect(category.id).toBeInstanceOf(UniqueIdEntity);
+        expect(category.id).not.toBeNull();
         expect(category.props).toStrictEqual({
             name: 'test',
             description: 'test',
@@ -33,11 +32,11 @@ describe('Category Unit Test Entity', () => {
     // Arrange
         const props = {name: 'test'};
         // Act
-        const category = new Category(props, new UniqueIdEntity());
+        const category = new Category(props, 'fbadc64a-96a9-4a15-9f77-1cf00a309a46');
         // Assert
         expect(category.createdAt).toBeInstanceOf(Date);
         expect(category.description).toBeNull();
         expect(category.isActive).toBeTruthy();
-        expect(category.id).toBeInstanceOf(UniqueIdEntity);
+        expect(category.id).not.toBeNull();
     });
 });
