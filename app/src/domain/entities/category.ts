@@ -9,9 +9,9 @@ export type CategoryProperties = {
 export class Category {
     constructor(
     public readonly props: CategoryProperties,
-    public readonly id?: UniqueIdEntity
+    public readonly id?: string
     ) {
-        this.id = id || new UniqueIdEntity();
+        this.id = id || (new UniqueIdEntity()).id;
     }
 
     get name(): string {

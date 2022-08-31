@@ -1,15 +1,8 @@
-import { InvalidIdEntity } from '../errors/invalid-id-entity.error';
-import { v4 as uuid, validate } from 'uuid';
-
+import { UniqueIdEntityFactory } from '../factories/unique-id-entity/unique-id-entity.factory';
 export class UniqueIdEntity {
     constructor(public readonly id? : string) {
-        this.id = id || uuid();
-        this.validate();
-    }
-
-    private validate() {
-        if(!validate(this.id)) {
-            throw new InvalidIdEntity();
-        }
+        const uniqueIdFactory = UniqueIdEntityFactory.create();
+        this.id = id || uniqueIdFactory.getUniqueId();
+        uniqueIdFactory.validate(this.id);
     }
 }
