@@ -20,19 +20,15 @@ describe('Category Unit Test Entity', () => {
         expect(category.isActive).toBeTruthy();
         expect(category.createdAt).toBe(createdAt);
         expect(category.id).not.toBeNull();
-        expect(category.props).toStrictEqual({
-            name: 'test',
-            description: 'test',
-            createdAt,
-            isActive: true 
-        });
+        expect(category.props).toStrictEqual(props);
+        expect(category.toJSON()).toStrictEqual({id: category.id, ...props});
     });
 
     it('Should create a instance only with name successfully', () => {
-    // Arrange
+        // Arrange
         const props = {name: 'test'};
         // Act
-        const category = new Category(props, 'fbadc64a-96a9-4a15-9f77-1cf00a309a46');
+        const category = new Category(props);
         // Assert
         expect(category.createdAt).toBeInstanceOf(Date);
         expect(category.description).toBeNull();
