@@ -35,4 +35,34 @@ describe('Category Unit Test Entity', () => {
         expect(category.isActive).toBeTruthy();
         expect(category.id).not.toBeNull();
     });
+
+    it('Should test update whit success', () => {
+        // Arrange
+        const category = new Category({name: 'test'});
+
+        //Act
+        category.update('test2', 'test description');
+
+        // Assert
+        expect(category.description).not.toBeNull();
+        expect(category.name).toBe('test2');        
+    });
+
+    it('Should change Activate State to success', () => {
+        // Arrange
+        const category = new Category({name: 'test'});
+
+        // Act
+        category.desactivate();
+
+        // Assert
+        expect(category.isActive).toBeFalsy();
+
+        // Act
+        category.activate();
+
+        // Assert
+        expect(category.isActive).toBeTruthy();
+
+    });
 });
