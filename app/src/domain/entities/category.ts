@@ -1,5 +1,5 @@
 import { Entity } from '../shared/entities/entity';
-import { UniqueIdEntity } from '../shared/value-objects/unique-id-entity.vo';
+import { CategoryValidatorFactory } from './category-validator';
 
 export type CategoryProperties = {
   name: string
@@ -47,6 +47,11 @@ export class Category extends Entity<CategoryProperties> {
 
     desactivate(): void {
         this.props.isActive = false;
+    }
+
+    static validate(props: CategoryProperties): void {
+        const validator = CategoryValidatorFactory.create();
+        validator.validate(props);
     }
 
 }
